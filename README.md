@@ -8,7 +8,7 @@ Here is an example output using input "ABCDE" (without memoization in this case)
 
 ![permute_result](permute_result.png)
 
-And here is the key code to generate the above. This is not necessarily the [cleanest or fastest way](https://stackoverflow.com/questions/13109274/python-recursion-permutations).
+And here is the key code used to generate the above. This is not necessarily the [cleanest or fastest way](https://stackoverflow.com/questions/13109274/python-recursion-permutations).
 
 ```
 def permute(orig_str, current_str = ''):
