@@ -43,7 +43,7 @@ def permute(orig_str, current_str = ''):
 
 calls = []
 permutations = []
-string_to_permute = 'ABCDE'
+string_to_permute = 'abcde'
 start = timer()
 permute(string_to_permute)
 end = timer()
