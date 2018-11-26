@@ -1,8 +1,10 @@
 ## Time complexity and number of function calls
 
-As widely noted, there are N! permutations of N distinct elements, so any algorithm - recursive or not - will be very slow to finish (at least O(N!)) when N is large.  But how much worse might it get for our particular code?  For that we have to at least count the number times the `permute` function is called. We'll assume that the function can be written so that each pass through only does one operation so that the count of `permute` function calls is proportional to computational complexity.  (In reality, the set operations often performed by `permute` would add up to N computations for each pass.)
+As widely noted, there are N! permutations of N distinct elements, so any algorithm that generates permutations - recursive or not - will be very slow to finish (at least O(N!)) when N is large.  But how much worse might it get for our particular code?  For that we have to at least count the number times the `permute` function is called. We'll assume that the function can be written so that each pass through only does one operation so that the count of `permute` function calls is proportional to computational complexity.
 
-To count the function calls, we make a diagram:
+In reality, the set operations often performed by `permute` would add up to N computations for each pass.  A version that handles inputs with repeated characters (see last section of Jupyter notebook) would add a little more complexity as well.
+
+To count the function calls, we make a diagram, permuting "ABC" as an example:
 
 ![tree_diag](tree_diag.png)
 
@@ -22,7 +24,7 @@ Memoizing (caching) does not speed up the process of generating permutations rec
 
 This lack of benefit from memoization stands in contrast to recursive algorithms that depend on induction (like the Fibonacci sequence), which frequently re-evaluate function calls with the same arguments.  With memoization, the results of these calls can be looked up after being calculated once (rather than re-running the function), saving significant computation time.
 
-Here is an example output using input "ABCDE" (without memoization in this case):
+Here is an example output using input "abcde" (without memoization in this case):
 
 ![permute_result](permute_result.png)
 
