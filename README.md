@@ -28,7 +28,7 @@ Here is an example output using input "abcde" (without memoization in this case)
 
 ![permute_result](permute_result.png)
 
-And here is the key code used to generate the above. This is not necessarily the [cleanest or fastest way](https://stackoverflow.com/questions/13109274/python-recursion-permutations).
+And here is the key code used to generate the above. This is not necessarily the [cleanest or fastest way](https://stackoverflow.com/questions/13109274/python-recursion-permutations). The constant factor could be reduced to e-1 by testing whether `len(diff) == 1` and, if so, adding the final character and appending the permutation to the list without calling `permute` again.
 
 ```
 def permute(orig_str, current_str = ''):
