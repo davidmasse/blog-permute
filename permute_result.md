@@ -1,12 +1,16 @@
 ## When memoizing (caching function results) doesn't help
 
-Memoizing does not speed up the process of generating permutations recursively. When the `permute` function calls itself (as it does e * n! times), it never passes the same partial or fully formed permutation string twice. It's designed not to as it uses a branching tree to continually vary `current_str`. Therefore no memoized/cached value is ever accessed to evaluate any function call. Every function call must actually run, so there is no benefit to memoizing.
+Memoizing (caching) does not speed up the process of generating permutations recursively (see Jupyter notebook). The memoized version often has a small percentage speed advantage, but many times it is slower (cost of recording memoized values).  This is because, when the `permute` function calls itself (as it does e * n! times, see next section), it never passes the same partial or fully formed permutation string twice. It's designed not to as it uses a branching tree to continually vary `current_str`. Therefore no memoized value is ever accessed to evaluate any function call. Every function call must actually run, so there is no benefit to memoizing.
 
-This stands in contrast to recursive algorithms that depend on induction (like the Fibonacci sequence), which frequently re-evaluate function calls with the same arguments.  With memoization, the results of these calls can be looked up after being calculated once (rather than re-running the function), saving significant computation time.
+Here is an example output using input "ABCDE" (without memoization in this case):
+
+![permute_result](permute_result.png)
+
+This lack of benefit from memoization stands in contrast to recursive algorithms that depend on induction (like the Fibonacci sequence), which frequently re-evaluate function calls with the same arguments.  With memoization, the results of these calls can be looked up after being calculated once (rather than re-running the function), saving significant computation time.
 
 ## Time complexity and number of function calls
 
-As widely noted, there are N! permutations of N distinct elements, so any algorithm - recursive or not - will be very slow to finish (at least O(N!)) when N is large.  But how much worse than that might it be for our particular code?  For that we have to at least count the number times the `permute` function is called. We'll assume that the function can be written so that each pass through only does one operation so that the count of `permute` function calls is proportional to computational complexity.  (In reality, the set operations often performed by `permute` would add up to N computations for each pass.)
+As widely noted, there are N! permutations of N distinct elements, so any algorithm - recursive or not - will be very slow to finish (at least O(N!)) when N is large.  But how much worse might it get for our particular code?  For that we have to at least count the number times the `permute` function is called. We'll assume that the function can be written so that each pass through only does one operation so that the count of `permute` function calls is proportional to computational complexity.  (In reality, the set operations often performed by `permute` would add up to N computations for each pass.)
 
 To count the function calls, we make a diagram:
 
