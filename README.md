@@ -2,11 +2,38 @@
 
 Memoizing (caching) does not speed up the process of generating permutations recursively (see Jupyter notebook). The memoized version often has a small percentage speed advantage, but many times it is slower (cost of recording memoized values).  This is because, when the `permute` function calls itself (as it does e * n! times, see next section), it never passes the same partial or fully formed permutation string twice. It's designed not to as it uses a branching tree to continually vary `current_str`. Therefore no memoized value is ever accessed to evaluate any function call. Every function call must actually run, so there is no benefit to memoizing.
 
+This lack of benefit from memoization stands in contrast to recursive algorithms that depend on induction (like the Fibonacci sequence), which frequently re-evaluate function calls with the same arguments.  With memoization, the results of these calls can be looked up after being calculated once (rather than re-running the function), saving significant computation time.
+
 Here is an example output using input "ABCDE" (without memoization in this case):
 
 ![permute_result](permute_result.png)
 
-This lack of benefit from memoization stands in contrast to recursive algorithms that depend on induction (like the Fibonacci sequence), which frequently re-evaluate function calls with the same arguments.  With memoization, the results of these calls can be looked up after being calculated once (rather than re-running the function), saving significant computation time.
+And here is the key code to generate the above. This is not necessarily the [cleanest or fastest way](https://stackoverflow.com/questions/13109274/python-recursion-permutations).
+
+```
+def permute(orig_str, current_str = ''):
+    diff = set(orig_str) - set(current_str)
+    calls.append(1)
+    if len(diff) == 0:
+        permutations.append(current_str)
+    else:
+        for char in diff:
+            permute(orig_str, current_str + char)
+    return (calls, permutations)
+
+calls = []
+permutations = []
+string_to_permute = 'ABCDE'
+start = timer()
+permute(string_to_permute)
+end = timer()
+time_reg = end - start
+print('time: ', time_reg)
+print('number of function calls, including the initial call: ', sum(calls))
+print('number of permutations: ', len(permutations))
+print('tree nodes / leaves: ', sum(calls)/len(permutations))
+print('sorted permutations: ', sorted(permutations))
+```
 
 ## Time complexity and number of function calls
 
